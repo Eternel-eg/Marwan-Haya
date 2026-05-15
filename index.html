@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marwan & Haya | Wedding Invitation</title>
+    
+    <!-- Google Fonts for Elegant Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           COLOR PALETTE & GLOBAL VARIABLES
+           ========================================================================== */
+        :root {
+            --cream: #F7F2EA;
+            --warm-ivory: #EFE7DC;
+            --sage-green: #A8B5A2;
+            --deep-sage: #7D8D77;
+            --soft-gold: #C7B38A;
+            --text-dark: #3a4536;
+            
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        /* ==========================================================================
+           RESET & BASE STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-dark);
+            background-color: var(--warm-ivory); 
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        body.loaded {
+            overflow-y: auto;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==========================================================================
+           PAGE 1: LOADING SCREEN & ANIMATIONS
+           ========================================================================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--cream);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .loader-logo {
+            width: 250px;
+            height: auto;
+            animation: pulseFade 2.5s infinite alternate ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        /* Spinner Animation */
+        .spinner {
+            width: 45px;
+            height: 45px;
+            border: 3px solid rgba(168, 181, 162, 0.3);
+            border-top-color: var(--sage-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseFade {
+            0% { opacity: 0.6; transform: scale(0.96); filter: blur(1px); }
+            100% { opacity: 1; transform: scale(1.02); filter: blur(0px); }
+        }
+
+        body.loaded #preloader {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           PAGE 2: MAIN CARD CONTAINER
+           ========================================================================== */
+        
+        .page-wrapper {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px; 
+        }
+
+        /* 1st Layer: The Background Paper */
+        #invitation-container {
+            width: 100%;
+            max-width: 540px; 
+            position: relative;
+            margin: 0 auto;
+            
+            background-image: url('background.png');
+            background-size: 100% 100%; /* Stretches the tall image to perfectly fit the content */
+            background-repeat: no-repeat; /* Prevents repeating since you made it tall enough */
+            background-position: top center;
+            
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); 
+            overflow: hidden; 
+        }
+
+        /* ==========================================================================
+           🛑 IMAGE & GIF CONTROL PANEL 🛑
+           ========================================================================== */
+        
+        .inline-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            mix-blend-mode: multiply; 
+        }
+
+        /* 1. TOP LOGO (logo2.png) */
+        .main-logo {
+            width: 100%; /* Forces the logo to obey the max-width exactly */
+            max-width: 200px; /* <--- EDIT THIS TO RESIZE THE LOGO */
+            margin-top: 60px;     
+            margin-bottom: 20px;  
+            mix-blend-mode: normal; 
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.05));
+        }
+
+        /* 2. MIDDLE FOUNTAIN GIF (gif1.gif) */
+        .fountain-gif {
+            width: 100%; /* <--- SET TO 100% */
+            margin-top: 20px;     
+            margin-bottom: 10px;  
+        }
+
+        /* 3. BOTTOM CRANES GIF (gif2.gif) */
+        .cranes-gif {
+            width: 100%; /* <--- SET TO 100% */
+            margin-top: 20px;     
+            margin-bottom: 50px;  
+        }
+
+
+        /* ==========================================================================
+           MAIN CONTENT LAYOUT & TYPOGRAPHY
+           ========================================================================== */
+        .content-wrapper {
+            position: relative;
+            z-index: 10; 
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            position: relative;
+            z-index: 2; 
+            width: 100%;
+            padding: 30px 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- ADVANCED TEXT ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+            filter: blur(6px);
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        filter 1.2s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* Delay helper for staggered hero animations */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        .intro-text {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--deep-sage);
+            margin-bottom: 15px;
+        }
+
+        /* Floating Name Effect */
+        .names {
+            font-size: 4.5rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-style: italic;
+            animation: floatText 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatText {
+            0% { transform: translateY(0px); text-shadow: 0px 5px 15px rgba(168, 181, 162, 0.1); }
+            100% { transform: translateY(-8px); text-shadow: 0px 15px 25px rgba(168, 181, 162, 0.4); }
+        }
+
+        .request-text {
+            font-size: 1.2rem;
+            color: var(--deep-sage);
+            margin-bottom: 20px;
+            max-width: 90%;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .details {
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .details p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+        }
+
+        .details span {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--deep-sage);
+            font-style: italic;
+        }
+
+        /* Glassmorphism Button */
+        .btn-elegant {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(168, 181, 162, 0.85);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(125, 141, 119, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .btn-elegant:hover {
+            background: rgba(125, 141, 119, 1);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(125, 141, 119, 0.3);
+        }
+
+        /* --- UI PANELS (COUNTDOWN & RSVP) --- */
+        .glass-panel {
+            /* Fully transparent as requested */
+            background: transparent; 
+            border: none;
+            box-shadow: none;
+            padding: 20px 10px;
+            width: 100%;
+        }
+
+        .glass-panel h2 {
+            font-size: 2.5rem;
+            color: var(--deep-sage);
+            margin-bottom: 30px;
+            font-style: italic;
+            text-shadow: 1px 1px 5px rgba(255,255,255,0.6); 
+        }
+
+        /* --- COUNTDOWN --- */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+        }
+
+        .time-box span.number {
+            font-family: var(--font-serif);
+            font-size: 3.5rem; 
+            color: var(--sage-green); 
+            line-height: 1;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .time-box span.label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: black; 
+            font-weight: 600; 
+        }
+
+        /* --- RSVP SECTION --- */
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 10px;
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: black; 
+            font-weight: 600;
+            margin-left: 5px;
+            text-transform: uppercase;
+        }
+
+        .elegant-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.85); 
+            border: 1px solid rgba(168, 181, 162, 0.6);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .elegant-input:focus {
+            background: rgba(255, 255, 255, 1);
+            border-color: var(--deep-sage);
+            box-shadow: 0 0 15px rgba(168, 181, 162, 0.4);
+            transform: translateY(-2px);
+        }
+
+        select.elegant-input {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        textarea.elegant-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            margin-top: 15px;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px; 
+            font-weight: 500;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding: 0; 
+            }
+            #invitation-container {
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .names { font-size: 3.5rem; }
+            .timer-container { gap: 15px; }
+            .time-box span.number { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: FULLSCREEN LOADER -->
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="logo1.gif" alt="Marwan & Haya Initials" class="loader-logo">
+            <div class="spinner"></div>
+            <!-- This button is hidden until assets finish loading -->
+            <button id="enter-btn" class="btn-elegant" style="display: none; margin-top: 30px;">Join our celebration</button>
+        </div>
+    </div>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="page-wrapper">
+        
+        <!-- INVITATION CARD -->
+        <div id="invitation-container">
+
+            <div class="content-wrapper">
+                
+                <!-- 2nd Layer: logo2.png at the top -->
+                <img src="logo2.png" alt="MH Logo" class="inline-image main-logo reveal active">
+                
+                <section class="hero-text">
+                    <p class="intro-text reveal delay-1">Together with their families</p>
+                    <h1 class="names reveal delay-2">Marwan & Haya</h1>
+                    <p class="request-text serif reveal delay-3">
+                        Request the pleasure of your presence<br>at their marriage
+                    </p>
+                </section>
+
+                <!-- 3rd Layer: gif1.gif placed right under logo and introductory text -->
+                <img src="gif1.gif" alt="Decorative Fountain" class="inline-image fountain-gif reveal">
+
+                <section class="reveal">
+                    <div class="details">
+                        <p>DATE<br><span>15th of Aug, 2026</span></p>
+                        <br>
+                        <p>LOCATION<br><span>AZHA New Cairo Venue</span></p>
+                    </div>
+
+                    <a href="https://www.google.com/maps?q=AZHA+New+Cairo+Venue,+Suez+Rd,+El+Shorouk,+Cairo+Governorate+4912052&ftid=0x14581d543b64ee61:0x360ad4c38dc95575&entry=gps&shh=CAE&lucs=,94297699,94284493,94231188,94280568,47071704,94218641,94282134,94286869&g_ep=CAISEjI2LjE4LjAuOTA2NTA0NDMzMBgAINeCAypILDk0Mjk3Njk5LDk0Mjg0NDkzLDk0MjMxMTg4LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDk0Mjg2ODY5QgJFRw%3D%3D&skid=2d58b978-c7a2-4467-a120-017a0376226a&g_st=ic" target="_blank" class="btn-elegant">
+                        View Location
+                    </a>
+                </section>
+
+                <!-- COUNTDOWN SECTION -->
+                <section class="reveal">
+                    <div class="glass-panel">
+                        <h2>The Countdown</h2>
+                        <div class="timer-container" id="countdown">
+                            <div class="time-box">
+                                <span class="number" id="days">00</span>
+                                <span class="label">Days</span>
+                            </div>
+                            <div class="time-box">
+                                <span class="number" id="hours">00</span>
+                                <span class="label">Hours</span>
+                            </div>
+                            <div class="time-box">
+                                <span class="number" id="minutes">00</span>
+                                <span class="label">Minutes</span>
+                            </div>
+                            <div class="time-box">
+                                <span class="number" id="seconds">00</span>
+                                <span class="label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RSVP SECTION -->
+                <section class="reveal">
+                    <div class="glass-panel">
+                        <h2>RSVP</h2>
+                        <p class="serif" style="margin-bottom: 20px; color: black; font-weight: 500;">Kindly reply to confirm your attendance.</p>
+                        
+                        <form class="rsvp-form" onsubmit="event.preventDefault(); alert('RSVP sent successfully! (This is a visual demo)');">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="elegant-input" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <select id="guests" class="elegant-input">
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 Persons</option>
+                                    <option value="3">3 Persons</option>
+                                    <option value="4">4 Persons</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="attendance">Attendance</label>
+                                <select id="attendance" class="elegant-input">
+                                    <option value="joyfully_accept">Joyfully Accept</option>
+                                    <option value="regretfully_decline">Regretfully Decline</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Leave a Message (Optional)</label>
+                                <textarea id="message" class="elegant-input" placeholder="Your warm wishes..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-elegant btn-submit">Send RSVP</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- 4th Layer: gif2.gif placed right under the RSVP section -->
+                <img src="gif2.gif" alt="Cranes Art" class="inline-image cranes-gif reveal">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           1. ASSET PRELOADER WITH "JOIN CELEBRATION" BUTTON
+           ========================================================================== */
+        const assetsToLoad = [
+            'background.jpg',
+            'logo1.gif',
+            'logo2.png',
+            'gif1.gif',
+            'gif2.gif'
+        ];
+        
+        let loadedCount = 0;
+        let isReady = false;
+
+        function showEnterButton() {
+            if (isReady) return;
+            isReady = true;
+            
+            // Hide spinner, show button with animation
+            document.querySelector('.spinner').style.display = 'none';
+            const enterBtn = document.getElementById('enter-btn');
+            enterBtn.style.display = 'inline-block';
+            
+            enterBtn.animate([
+                { opacity: 0, transform: 'translateY(15px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], { duration: 800, fill: 'forwards', easing: 'ease-out' });
+        }
+
+        function checkPreloadComplete() {
+            loadedCount++;
+            if (loadedCount === assetsToLoad.length) {
+                setTimeout(showEnterButton, 800); // Slight delay for smoothness
+            }
+        }
+
+        assetsToLoad.forEach(src => {
+            const img = new Image();
+            img.onload = checkPreloadComplete;
+            img.onerror = checkPreloadComplete;
+            img.src = src;
+        });
+
+        // Failsafe if images take too long
+        setTimeout(showEnterButton, 6000);
+
+        // Handle Entry Click
+        document.getElementById('enter-btn').addEventListener('click', () => {
+            document.body.classList.add('loaded');
+            
+            // Stagger hero section reveal animations once entered
+            setTimeout(() => {
+                document.querySelectorAll('.hero-text .reveal').forEach(el => el.classList.add('active'));
+            }, 500); 
+        });
+
+        /* ==========================================================================
+           2. SCROLL REVEAL ANIMATIONS
+           ========================================================================== */
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        // Start observing remaining reveals that aren't manually triggered
+        document.querySelectorAll('.reveal:not(.hero-text .reveal):not(.main-logo)').forEach(section => {
+            observer.observe(section);
+        });
+
+        /* ==========================================================================
+           3. COUNTDOWN TIMER
+           ========================================================================== */
+        const targetDate = new Date("August 15, 2026 00:00:00").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("countdown").innerHTML = "<h3 style='font-family: var(--font-serif); font-size: 2rem;'>The big day is here!</h3>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
