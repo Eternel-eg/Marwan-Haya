@@ -172,11 +172,9 @@
             margin-bottom: 10px;  
         }
 
-        /* 3. BOTTOM CRANES GIF (gif2.gif) */
+        /* 3. BOTTOM CRANES GIF (gif2.gif) - Margin handled by wrapper now */
         .cranes-gif {
             width: 100%; /* <--- SET TO 100% */
-            margin-top: 20px;     
-            margin-bottom: 50px;  
         }
 
 
@@ -451,6 +449,37 @@
             background: rgba(255, 255, 255, 1);
         }
 
+        /* --- CLOSING WRAPPER (GIF + TEXT) --- */
+        .closing-wrapper {
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .closing-wrapper .cranes-gif {
+            margin: 0;
+            width: 100%;
+        }
+
+        .closing-text {
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            font-style: italic;
+            line-height: 1.2;
+            text-shadow: 0 0 15px rgba(247, 242, 234, 1), 0 0 5px rgba(247, 242, 234, 0.8);
+            z-index: 5;
+            pointer-events: none; /* Let clicks pass through to the image if needed */
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .page-wrapper {
@@ -464,6 +493,7 @@
             .timer-container { gap: 15px; }
             .time-box span.number { font-size: 2.5rem; }
             .audio-toggle { bottom: 15px; right: 15px; width: 40px; height: 40px; font-size: 1rem; }
+            .closing-text { font-size: 1.8rem; bottom: 10%; }
         }
     </style>
 </head>
@@ -586,8 +616,11 @@
                     </div>
                 </section>
 
-                <!-- 4th Layer: gif2.gif placed right under the RSVP section -->
-                <img src="gif2.gif" alt="Cranes Art" class="inline-image cranes-gif reveal">
+                <!-- 4th Layer: gif2.gif placed right under the RSVP section, now wrapped to hold the closing text -->
+                <div class="closing-wrapper reveal">
+                    <img src="gif2.gif" alt="Cranes Art" class="inline-image cranes-gif">
+                    <h3 class="closing-text">All Our Love,<br>Marwan & Haya ♡ </h3>
+                </div>
 
             </div>
         </div>
